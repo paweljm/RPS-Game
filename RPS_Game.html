@@ -5,6 +5,14 @@
   <title>RPS</title>
 </head>
 <body>
+  <h1>Rock Paper Scissors Game</h1>
+  <div id="play-area">
+    <div class="choice-container">
+      <button id="rock">Rock</button>
+      <button id="paper">Paper</button>
+      <button id="scissors">Scissors</button>
+    </div>
+  </div>
   <script>
       const moves = ['rock','paper','scissors'];
       let result;
@@ -41,14 +49,24 @@
           }
         }
       }
-      function game(){
-        for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt('RPS:').toLowerCase();
+      const displayContainer = document.querySelector('#play-area');
+      const display = document.createElement('h2');
+      display.textContent = "Make a selection by pressing one of the buttons.";
+      displayContainer.appendChild(display);
+      
+      const buttons = document.querySelectorAll('button');
+      buttons.forEach((button) => {
+        button.addEventListener('click', (e) => {
+          game(button.id);
+        })
+      })
+
+
+      function game(playerSelection){
         let computerSelection = computerPlay();
+        display.textContent = playRound(playerSelection, computerSelection);
         console.log(playRound(playerSelection, computerSelection));
         }
-      }
-      game();
   </script>
 </body>
 </html>
